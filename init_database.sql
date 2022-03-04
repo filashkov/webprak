@@ -14,8 +14,8 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
-INSERT INTO services_description
-(service_type_name, service_type_description, service_approximate_cost)
+INSERT INTO services
+(service_type_name, service_description, service_approximate_cost)
 VALUES
 ('Защита потребителей', 'Любые услуги, консультации по защите потребителей', 100),
 ('Недвижимость', 'Всё, что связано с недвижимостью', 100);
@@ -27,7 +27,7 @@ VALUES
 ('Жуков Иван Сергеевич', 89167390579, 'jukov@mail.ru', 'jukov', 'qwerty'),
 ('Масленников Пётр Александрович', 89267489380, 'erbb@yandex.ru', 'okcff', 'qwerty');
 
-INSERT INTO registered_services
+INSERT INTO contracts
 (client_id, service_type_id, beginning_date, date_of_completion, additional_information, real_cost)
 VALUES
 (1, 1, '2022-01-16', '2022-01-17', 'fkjn', 200),

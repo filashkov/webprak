@@ -19,10 +19,10 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 
-CREATE TABLE services_description(
-    service_type_id SERIAL PRIMARY KEY,
+CREATE TABLE services(
+    service_id SERIAL PRIMARY KEY,
     service_type_name text,
-    service_type_description text,
+    service_description text,
     service_approximate_cost integer
 );
 
@@ -35,10 +35,10 @@ CREATE TABLE clients(
     client_password text NOT NULL
 );
 
-CREATE TABLE registered_services(
-    registered_service_id SERIAL PRIMARY KEY,
+CREATE TABLE contracts(
+    contract_id SERIAL PRIMARY KEY,
     client_id integer REFERENCES clients(client_id),
-    service_type_id integer REFERENCES services_description(service_type_id),
+    service_type_id integer REFERENCES services(service_id),
     beginning_date date NOT NULL,
     date_of_completion date,
     additional_information text,
@@ -59,5 +59,5 @@ CREATE TABLE staff(
 
 CREATE TABLE employee_registered_service(
     employee_id integer REFERENCES staff(employee_id),
-    registered_service_id integer REFERENCES registered_services(registered_service_id)
+    registered_service_id integer REFERENCES contracts(contract_id)
 );
