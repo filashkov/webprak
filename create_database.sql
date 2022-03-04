@@ -29,7 +29,7 @@ CREATE TABLE services_description(
 CREATE TABLE clients(
     client_id SERIAL PRIMARY KEY,
     client_fullname text NOT NULL,
-    client_contact_phone integer,
+    client_contact_phone decimal,
     client_email text,
     client_login text NOT NULL,
     client_password text NOT NULL
@@ -39,7 +39,7 @@ CREATE TABLE registered_services(
     registered_service_id SERIAL PRIMARY KEY,
     client_id integer REFERENCES clients(client_id),
     service_type_id integer REFERENCES services_description(service_type_id),
-    beginning_date date,
+    beginning_date date NOT NULL,
     date_of_completion date,
     additional_information text,
     real_cost integer
@@ -47,12 +47,12 @@ CREATE TABLE registered_services(
 
 CREATE TABLE staff(
     employee_id SERIAL PRIMARY KEY,
-    employee_fullname text,
+    employee_fullname text NOT NULL,
     employee_address text,
-    employee_phone_number integer,
+    employee_phone_number decimal,
     employee_email text,
-    employee_login text,
-    employee_password text,
+    employee_login text NOT NULL,
+    employee_password text NOT NULL,
     employee_post text,
     employee_is_admin integer
 );
