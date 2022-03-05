@@ -28,7 +28,7 @@ VALUES
 ('Масленников Пётр Александрович', 89267489380, 'erbb@yandex.ru', 'okcff', 'qwerty');
 
 INSERT INTO contracts
-(client_id, service_type_id, beginning_date, date_of_completion, additional_information, real_cost)
+(client_id, service_type_id, beginning_date, date_of_completion, contract_description, real_cost)
 VALUES
 (1, 1, '2022-01-16', '2022-01-17', 'fkjn', 200),
 (2, 1, '2022-02-23', '2022-02-25', 'jgl', 200),

@@ -41,7 +41,7 @@ CREATE TABLE contracts(
     service_type_id integer REFERENCES services(service_id),
     beginning_date date NOT NULL,
     date_of_completion date,
-    additional_information text,
+    contract_description text,
     real_cost integer
 );
 
