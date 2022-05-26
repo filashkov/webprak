@@ -47,9 +47,6 @@ public abstract class GenericDAOImplementation<T extends GenericEntity<ID>, ID e
     @Override
     public void save(T entity) {
         try (Session session = sessionFactory.openSession()) {
-            if (entity.getId() != null) {
-                entity.setId(null);
-            }
             session.beginTransaction();
             session.saveOrUpdate(entity);
             session.getTransaction().commit();

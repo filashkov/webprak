@@ -30,11 +30,5 @@ public class StaffDAOImplementation extends GenericDAOImplementation<Staff, Long
             return query.getResultList();
         }
     }
-
-    /*
-    private String likeExpr(String param) {
-        return "%" + param + "%";
-    }
-    */
 }
 

@@ -53,8 +53,4 @@ public class ContractsDAOImplementation extends GenericDAOImplementation<Contrac
             return query.getResultList();
         }
     }
-
-//    private String likeExpr(String param) {
-//        return "%" + param + "%";
-//    }
 }
