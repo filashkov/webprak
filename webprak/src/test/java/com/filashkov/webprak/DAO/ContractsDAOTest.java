@@ -86,14 +86,18 @@ public class ContractsDAOTest {
     @Test
     void updating_test() {
         List<Contracts> would_be_updated_list = contractsDAO.getAllContractsByColValue("client_id", "2");
-        assertEquals(would_be_updated_list.size(), 1);
+        assertEquals(1, would_be_updated_list.size());
+        Contracts original = new Contracts(2L, 2L, 1L, Date.valueOf("2022-02-23"), Date.valueOf("2022-02-25"), "jgl", 200L);
+        assertEquals(would_be_updated_list.get(0), original);
+
         Contracts would_be_updated = would_be_updated_list.get(0);
-        Contracts original = would_be_updated;
         would_be_updated.setDate_of_completion(Date.valueOf("2022-02-26"));
         contractsDAO.update(would_be_updated);
-        List<Contracts> updated_list = contractsDAO.getAllContractsByColValue("client_id", "2");
-        Contracts updated = updated_list.get(0);
+
+        List<Contracts> after_updating_list = contractsDAO.getAllContractsByColValue("client_id", "2");
+        Contracts updated = after_updating_list.get(0);
         assertEquals(updated, would_be_updated);
+
         updated.setDate_of_completion(Date.valueOf("2022-02-25"));
         contractsDAO.update(updated);
         List<Contracts> should_be_original_list = contractsDAO.getAllContractsByColValue("client_id", "2");

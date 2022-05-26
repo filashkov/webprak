@@ -74,42 +74,6 @@ public class ClientsDAOTest {
                 && gt_all_modified.containsAll(answer_all_modified));
     }
 
-    @Test
-    void test2_delete_and_save() {
-        Clients gt1 = new Clients(1L, "Иванов Николай Петрович", 89156785678L, "ivnipe@gmail.com", "ivnipe", "12345");
-        Clients gt2 = new Clients(2L, "Жуков Иван Сергеевич", 89167390579L, "jukov@mail.ru", "jukov", "qwerty");
-        Clients gt3 = new Clients(3L, "Масленников Пётр Александрович", 89267489380L, "erbb@yandex.ru", "okcff", "qwerty");
-
-        List<Clients> gt_all = new ArrayList<>();
-        gt_all.add(gt1);
-        gt_all.add(gt2);
-        gt_all.add(gt3);
-
-        List<Clients> clients_list = new ArrayList<>(clientsDAO.getAll());
-        assertTrue(clients_list.size() == gt_all.size() && clients_list.containsAll(gt_all) && gt_all.containsAll(clients_list));
-
-        clientsDAO.delete(gt2);
-        clientsDAO.delete(gt3);
-
-        List<Clients> should_be_gt1 = new ArrayList<>(clientsDAO.getAll());
-        assertEquals(should_be_gt1.size(), 1);
-        assertEquals(should_be_gt1.get(0), gt1);
-
-        clientsDAO.deleteById(1L);
-        List<Clients> should_be_empty = new ArrayList<>(clientsDAO.getAll());
-        assertEquals(should_be_empty.size(), 0);
-
-        clientsDAO.save(gt3);
-        List<Clients> should_be_gt3 = new ArrayList<>(clientsDAO.getAll());
-        assertEquals(should_be_gt3.size(), 1);
-        assertEquals(should_be_gt3.get(0), gt3);
-        clientsDAO.deleteById(3L);
-
-        clientsDAO.saveCollection(gt_all);
-        List<Clients> answer_all = new ArrayList<>(clientsDAO.getAll());
-        assertTrue(answer_all.size() == gt_all.size() && answer_all.containsAll(gt_all) && gt_all.containsAll(answer_all));
-    }
-
     // Тест - список всех клиентов по определённому имени и по номеру телефона
     @Test
     void get_by_name() {
