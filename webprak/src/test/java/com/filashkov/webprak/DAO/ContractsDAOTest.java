@@ -24,36 +24,47 @@ public class ContractsDAOTest {
     @Autowired
     private SessionFactory sessionFactory;
 
+    // Выбор из таблицы контрактов.
+    // Проверяется работа двух методов: выбор по значению и выбор по принадлежности промежутку (например, по дате или по цене)
+    // Проводятся на уже заполненный базе данных
     @Test
     void selections_test() {
         List<Contracts> gt = new ArrayList<>();
         gt.add(new Contracts(1L, 1L, 1L, Date.valueOf("2022-01-16"), Date.valueOf("2022-01-17"), "fkjn", 200L));
         gt.add(new Contracts(3L, 1L, 2L, Date.valueOf("2022-01-16"), Date.valueOf("2022-01-17"), "jlghgj", 250L));
 
+        List<Contracts> should_be_gt0 = contractsDAO.getAllContractsByColRange("contract_description", "a", "h");
+        assertEquals(1, should_be_gt0.size());
+        assertEquals(gt.get(0), should_be_gt0.get(0));
+
+        List<Contracts> should_be_gt1 = contractsDAO.getAllContractsByColRange("real_cost", "249", "251");
+        assertEquals(1, should_be_gt1.size());
+        assertEquals(gt.get(1), should_be_gt1.get(0));
+
         List<Contracts> first_answer = contractsDAO.getAllContractsByColValue("client_id", "1");
-        List<Contracts> second_answer = contractsDAO.getAllContractsByColRange("date_of_completition", "2022-01-16", "2022-01-18");
+        List<Contracts> second_answer = contractsDAO.getAllContractsByColRange("date_of_completion", "2022-01-16", "2022-01-18");
         assertTrue(first_answer.size() == gt.size() && first_answer.containsAll(gt) && gt.containsAll(first_answer));
         assertTrue(second_answer.size() == gt.size() && second_answer.containsAll(gt) && gt.containsAll(second_answer));
     }
 
     @Test
     void insertion_and_deleting_test() {
-        Contracts new_contract_a = new Contracts(33L, 1L, 2L, Date.valueOf("2022-01-14"), Date.valueOf("2022-01-19"), "jlghgj", 250L);
-        Contracts new_contract_b = new Contracts(34L, 1L, 2L, Date.valueOf("2022-01-13"), Date.valueOf("2022-01-20"), "jlghgj", 250L);
-        Contracts new_contract_c = new Contracts(35L, 1L, 2L, Date.valueOf("2022-01-12"), Date.valueOf("2022-01-21"), "jlghgj", 250L);
+        Contracts new_contract_a = new Contracts(null, 1L, 2L, Date.valueOf("2020-01-14"), Date.valueOf("2022-01-19"), "jlghgj", 250L);
+        Contracts new_contract_b = new Contracts(null, 1L, 2L, Date.valueOf("2022-01-13"), Date.valueOf("2022-01-20"), "fifth", 500L);
+        Contracts new_contract_c = new Contracts(null, 1L, 2L, Date.valueOf("2022-01-12"), Date.valueOf("2022-01-21"), "six", 600L);
         List<Contracts> contracts_list_new = new ArrayList<Contracts>();
         contracts_list_new.add(new_contract_a);
         contracts_list_new.add(new_contract_b);
         contracts_list_new.add(new_contract_c);
         contractsDAO.saveCollection(contracts_list_new);
 
-        List<Contracts> check_a = contractsDAO.getAllContractsByColValue("id", "33");
-        List<Contracts> check_b = contractsDAO.getAllContractsByColValue("id", "34");
-        List<Contracts> check_c = contractsDAO.getAllContractsByColValue("id", "35");
+        List<Contracts> check_a = contractsDAO.getAllContractsByColValue("beginning_date", "2020-01-14");
+        List<Contracts> check_b = contractsDAO.getAllContractsByColValue("contract_description", "fifth");
+        List<Contracts> check_c = contractsDAO.getAllContractsByColValue("real_cost", "600");
 
-        assertEquals(check_a.size(), 1);
-        assertEquals(check_b.size(), 1);
-        assertEquals(check_c.size(), 1);
+        assertEquals(1, check_a.size());
+        assertEquals(1, check_b.size());
+        assertEquals(1, check_c.size());
 
         assertEquals(check_a.get(0), new_contract_a);
         assertEquals(check_b.get(0), new_contract_b);
@@ -61,11 +72,11 @@ public class ContractsDAOTest {
 
         contractsDAO.delete(new_contract_a);
         contractsDAO.delete(new_contract_b);
-        contractsDAO.delete(new_contract_c);
+        contractsDAO.deleteById(new_contract_c.getId());
 
-        List<Contracts> deleted_a = contractsDAO.getAllContractsByColValue("id", "33");
-        List<Contracts> deleted_b = contractsDAO.getAllContractsByColValue("id", "34");
-        List<Contracts> deleted_c = contractsDAO.getAllContractsByColValue("id", "35");
+        List<Contracts> deleted_a = contractsDAO.getAllContractsByColValue("beginning_date", "2020-01-14");
+        List<Contracts> deleted_b = contractsDAO.getAllContractsByColValue("real_cost", "500");
+        List<Contracts> deleted_c = contractsDAO.getAllContractsByColValue("contract_description", "six");
 
         assertEquals(deleted_a.size(), 0);
         assertEquals(deleted_b.size(), 0);

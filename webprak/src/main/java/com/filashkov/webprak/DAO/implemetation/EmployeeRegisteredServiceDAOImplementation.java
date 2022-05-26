@@ -3,7 +3,7 @@ package com.filashkov.webprak.DAO.implemetation;
 import com.filashkov.webprak.DAO.EmployeeRegisteredServiceDAO;
 import com.filashkov.webprak.models.ComplexId;
 import com.filashkov.webprak.models.EmployeeRegisteredService;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -20,13 +20,12 @@ public class EmployeeRegisteredServiceDAOImplementation extends GenericDAOImplem
     }
 
     @Override
-    public List<EmployeeRegisteredService> getAllEmployeeRegisteredService(String col_name, String value) {
+    public List<EmployeeRegisteredService> getEmployeeRegisteredServiceByValue(String col_name, Long value) {
         try (Session session = sessionFactory.openSession()) {
             Query<EmployeeRegisteredService> query = session.createQuery
-                            ("FROM employee_registered_service WHERE :col = :v", EmployeeRegisteredService.class)
-                    .setParameter("col", col_name)
+                            ("FROM EmployeeRegisteredService WHERE " + col_name + " = :v", EmployeeRegisteredService.class)
                     .setParameter("v", value);
-            return query.getResultList().size() == 0 ? null : query.getResultList();
+            return query.getResultList();
         }
     }
 }

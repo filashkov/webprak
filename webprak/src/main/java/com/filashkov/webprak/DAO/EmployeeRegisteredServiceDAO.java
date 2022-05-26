@@ -6,5 +6,5 @@ import com.filashkov.webprak.models.EmployeeRegisteredService;
 import java.util.List;
 
 public interface EmployeeRegisteredServiceDAO extends GenericDAO<EmployeeRegisteredService, ComplexId> {
-    List<EmployeeRegisteredService> getAllEmployeeRegisteredService(String col_name, String value);
+    List<EmployeeRegisteredService> getEmployeeRegisteredServiceByValue(String col_name, Long value);
 }

@@ -7,18 +7,17 @@ import com.filashkov.webprak.models.Services;
 import java.util.List;
 
 public interface ServicesDAO extends GenericDAO<Services, Long> {
-    List<Services> getAllServicesByName(String serviceName);
-
-    Services getSingleServiceByName(String serviceName);
+    List<Services> getAllServicesByValue(String col_name, String serviceName);
+    List<Services> getAllServicesByRange(String col_name, String lower_bound, String upper_bound);
     // Service getSingleByID(Long id);
 
-    @Builder
-    @Getter
-    class Filter {
-        private String name;
-    }
-
-    static Filter.FilterBuilder getFilterBuilder() {
-        return Filter.builder();
-    }
+//    @Builder
+//    @Getter
+//    class Filter {
+//        private String name;
+//    }
+//
+//    static Filter.FilterBuilder getFilterBuilder() {
+//        return Filter.builder();
+//    }
 }

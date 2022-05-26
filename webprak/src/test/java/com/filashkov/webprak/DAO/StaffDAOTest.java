@@ -24,6 +24,11 @@ public class StaffDAOTest {
     @Test
     void test() {
         List<Staff> res = staffDAO.getAllStaffByValue("employee_fullname", "Николаев Пётр Никифорович");
-        assertEquals(res.size(), 1);
+        assertEquals(1, res.size());
+        Staff gt = new Staff(1L, "Николаев Пётр Никифорович", "df", 89150879678L, "niks@gmail.com", "niks", "dsfhgjhkjl", "Администратор", 1L);
+        assertEquals(res.get(0), gt);
+        res = staffDAO.getAllStaffByValue("employee_phone_number", "89150879678");
+        assertEquals(1, res.size());
+        assertEquals(res.get(0), gt);
     }
 }
