@@ -40,8 +40,8 @@ public class HomePageController {
         return "services";
     }
 
-    public int mode = 0;
-    public Long user_id = 3L;
+    public int mode = 3;
+    public Long user_id = null;
 
     public String fullname = "";
 
