@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+        .indent {
+            margin-left: 30px;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <title> Все сотрудники </title>
+</head>
+<body class="d-flex flex-column min-vh-100">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+<nav th:replace="site_elements :: my_header">
+</nav>
+
+<div class="indent">
+    <form method="get" action="/edit_staff">
+        <button id="addStaffButton" type="submit" class="btn btn-primary">Добавить нового сотрудника</button>
+    </form>
+    <br>
+
+    <table class="table table-bordered table-warning">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col"> Имя сотрудника </th>
+            <th scope="col"> ID сотрудника </th>
+            <th scope="col"> Адрес сотрудника </th>
+            <th scope="col"> Телефон сотрудника </th>
+            <th scope="col"> Email сотрудника </th>
+            <th scope="col"> Логин клиента </th>
+            <th scope="col" th:if="${mode == 0}"> Пароль сотрудника </th>
+            <th scope="col"> Должность сотрудника </th>
+            <th scope="col"> Права администратора </th>
+            <th scope="col" th:if="${mode == 0}"> Редактировать </th>
+            <th scope="col" th:if="${mode == 0}"> Удалить </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${staff_list.isEmpty()}">
+            <td colspan="6"> В базе пока нет ни одного сотрудника. <a href="/editPerson">Добавить?</a></td>
+        </tr>
+        <tr th:each="employee : ${staff_list}">
+            <td>
+                <span th:text="${employee.getEmployee_fullname()}"> </span>
+            </td>
+            <td>
+                <span th:text="${employee.getId()}"> </span>
+            </td>
+            <td>
+                <span th:text="${employee.getEmployee_address()}"> </span>
+            </td>
+            <td>
+                <span th:text="${employee.getEmployee_phone_number()}"> </span>
+            </td>
+            <td>
+                <span th:text="${employee.getEmployee_email()}"> </span>
+            </td>
+            <td>
+                <span th:text="${employee.getEmployee_login()}"> </span>
+            </td>
+            <td th:if="${mode == 0}">
+                <span th:text="${employee.getEmployee_password()}"> </span>
+            </td>
+            <td>
+                <span th:text="${employee.getEmployee_post()}"> </span>
+            </td>
+            <td>
+                <span th:text="${employee.getEmployee_is_admin()}"> </span>
+            </td>
+            </td>
+            <td th:if="${mode == 0}">
+                <form method="get" action="/edit_staff">
+                    <input type="hidden" name="staff_id" th:value="${employee.getId()}"/>
+                    <button id="editEmployeeButton" type="submit" class="btn btn-primary">Редактировать</button>
+                </form>
+            </td>
+            <td th:if="${mode == 0}">
+                <form method="get" action="/edit_staff">
+                    <input type="hidden" name="staff_id" th:value="${employee.getId()}"/>
+                    <button id="deleteEmployeeButton" type="submit" class="btn btn-primary">Удалить</button>
+                </form>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="site_elements :: my_footer">
+</footer>
+</body>
+</html>
