@@ -42,7 +42,7 @@
         </thead>
         <tbody>
         <tr th:if="${contracts_list.isEmpty()}">
-            <td colspan="6"> В базе пока нет ни одного контракта. <a href="/editPerson">Добавить?</a></td>
+            <td colspan="6"> В базе пока нет ни одного контракта. <a href="/edit_contract">Добавить контракт</a></td>
         </tr>
         <tr th:each="contract : ${contracts_list}">
             <td>
@@ -74,7 +74,7 @@
                 </form>
             </td>
             <td th:if="${mode <= 1}">
-                <form method="get" action="/edit_contract">
+                <form method="post" action="/delete_contract">
                     <input type="hidden" name="contract_id" th:value="${contract.getId()}"/>
                     <button id="deleteContractButton" type="submit" class="btn btn-primary">Удалить</button>
                 </form>

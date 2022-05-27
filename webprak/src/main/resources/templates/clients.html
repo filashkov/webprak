@@ -40,7 +40,7 @@
         </thead>
         <tbody>
         <tr th:if="${clients_list.isEmpty()}">
-            <td colspan="6"> В базе пока нет ни одного клиента. <a href="/editPerson">Добавить?</a></td>
+            <td colspan="6"> В базе пока нет ни одного клиента. <a href="/edit_client">Добавить клиента</a></td>
         </tr>
         <tr th:each="client : ${clients_list}">
             <td>
@@ -66,7 +66,7 @@
                 </form>
             </td>
             <td th:if="${mode == 0}">
-                <form method="get" action="/edit_client">
+                <form method="post" action="/delete_client">
                     <input type="hidden" name="client_id" th:value="${client.getId()}"/>
                     <button id="deleteClientButton" type="submit" class="btn btn-primary">Удалить</button>
                 </form>

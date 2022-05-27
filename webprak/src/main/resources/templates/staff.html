@@ -44,7 +44,7 @@
         </thead>
         <tbody>
         <tr th:if="${staff_list.isEmpty()}">
-            <td colspan="6"> В базе пока нет ни одного сотрудника. <a href="/editPerson">Добавить?</a></td>
+            <td colspan="6"> В базе пока нет ни одного сотрудника. <a href="/edit_staff">Добавить сотрудника</a></td>
         </tr>
         <tr th:each="employee : ${staff_list}">
             <td>
@@ -82,7 +82,7 @@
                 </form>
             </td>
             <td th:if="${mode == 0}">
-                <form method="get" action="/edit_staff">
+                <form method="post" action="/delete_staff">
                     <input type="hidden" name="staff_id" th:value="${employee.getId()}"/>
                     <button id="deleteEmployeeButton" type="submit" class="btn btn-primary">Удалить</button>
                 </form>

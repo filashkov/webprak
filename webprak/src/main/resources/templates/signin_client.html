@@ -21,19 +21,21 @@
 </nav>
 
 <div>
-    <form action="/signin" method="post">
+    <form method="post" action="/signin_as_client">
         <input id="user_login" required type="text" name="user_login" placeholder="Логин">
-        <input id="user_psw" required type="text" name="user_psw" placeholder="Пароль">
+        <input id="user_password" required type="text" name="user_password" placeholder="Пароль">
         <input type="submit" value="Войти как клиент" id="client_submit">
+    </form>
+    <form method="post" action="/signin_as_employee">
+        <input id="employee_login" required type="text" name="employee_login" placeholder="Логин">
+        <input id="employee_password" required type="text" name="employee_password" placeholder="Пароль">
         <input type="submit" value="Войти как сотрудник" id="employee_submit">
     </form>
+    <form method="post" action="/signin_as_guest">
+        <input type="submit" value="Войти как гость" id="guest_submit">
+    </form>
     <p></p>
-    <form action="/register" method="post">
-        <input id="login" required type="text" name="login" placeholder="Логин">
-        <input id="passwd" required type="text" name="passwd" placeholder="Пароль">
-        <input id="name" required type="text" name="name" placeholder="ФИО">
-        <input id="phone" type="text" name="phone" placeholder="Телефон">
-        <input id="email" type="text" name="email" placeholder="Email">
+    <form method="get" action="/edit_client">
         <input type="submit" value="Зарегистрироваться новым клиентом" id="register_submit">
     </form>
 </div>

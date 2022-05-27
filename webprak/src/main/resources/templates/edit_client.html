@@ -22,6 +22,8 @@
 
 <div class="indent">
     <form method="post" action="/save_client">
+        <label for="client_id">client_id:</label>
+        <input type="text" id="client_id" name="client_id" th:value="${client.getId()}"><br><br>
 
         <label for="client_fullname">ФИО Клиента:</label>
         <input type="text" id="client_fullname" name="client_fullname" required th:value="${client.getClient_fullname()}"><br><br>

@@ -62,7 +62,7 @@
                 </form>
             </td>
             <td th:if="${mode == 0}">
-                <form method="get" action="/delete_service">
+                <form method="post" action="/delete_service">
                     <input type="hidden" name="service_id" th:value="${service.getId()}"/>
                     <button id="deleteServiceButton" type="submit" class="btn btn-primary">Удалить</button>
                 </form>

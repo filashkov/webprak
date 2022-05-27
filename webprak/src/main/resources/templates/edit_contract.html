@@ -23,6 +23,9 @@
 <div class="indent">
     <form method="post" action="/save_contract">
 
+        <label for="contract_id">contract_id:</label>
+        <input type="text" id="contract_id" name="contract_id" th:value="${contract.getId()}"><br><br>
+
         <label for="client_id">client_id:</label>
         <input type="text" id="client_id" name="client_id" required th:value="${contract.getClient_id()}"><br><br>
 
@@ -30,10 +33,10 @@
         <input type="text" id="service_type_id" name="service_type_id" required th:value="${contract.getService_type_id()}"><br><br>
 
         <label for="beginning_date">Дата оформления:</label>
-        <input type="text" id="beginning_date" name="beginning_date" required th:value="${contract.getBeginning_date()}"><br><br>
+        <input type="text" id="beginning_date" name="beginning_date" th:value="${contract.getBeginning_date()}"><br><br>
 
         <label for="date_of_completion">Дата завершения:</label>
-        <input type="text" id="date_of_completion" name="date_of_completion" required th:value="${contract.getDate_of_completion()}"><br><br>
+        <input type="text" id="date_of_completion" name="date_of_completion" th:value="${contract.getDate_of_completion()}"><br><br>
 
         <label for="contract_description">Описание контракта:</label>
         <input type="text" id="contract_description" name="contract_description" required th:value="${contract.getContract_description()}"><br><br>

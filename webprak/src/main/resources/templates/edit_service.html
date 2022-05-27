@@ -24,7 +24,7 @@
   <form method="post" action="/save_service">
 
     <label for="service_id">service_id:</label>
-    <input type="text" id="service_id" name="service_id" required th:value="${service.getId()}"><br><br>
+    <input type="text" id="service_id" name="service_id" th:value="${service.getId()}"><br><br>
 
     <label for="service_type_name">service_type_name:</label>
     <input type="text" id="service_type_name" name="service_type_name" required th:value="${service.getService_type_name()}"><br><br>

@@ -23,6 +23,9 @@
 <div class="indent">
     <form method="post" action="/save_staff">
 
+        <label for="employee_id">employee_id:</label>
+        <input type="text" id="employee_id" name="employee_id" th:value="${staff.getId()}"><br><br>
+
         <label for="employee_fullname">ФИО сотрудника:</label>
         <input type="text" id="employee_fullname" name="employee_fullname" required th:value="${staff.getEmployee_fullname()}"><br><br>
 
